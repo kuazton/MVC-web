@@ -7,34 +7,47 @@ class Mper {
     private $correo;
     private $sexo;
 
-    private getNom(){
+    function getNom(){
         $this->nombre;
     }
-    private getNom(){
+    function getApe(){
         $this->apellido;
     }
-    private getNom(){
+    function getCorr(){
         $this->correo;
     }
-    private getNom(){
+    function getSex(){
         $this->sexo;
     }
-    private setNom($nombre){
+    function setNom($nombre){
         $this->nombre=$nombre;
     }
-    private setNom($apellido){
+    function setApe($apellido){
         $this->apellido=$apellido;
     }
-    private setNom($correo){
+    function setCorr($correo){
         $this->correo=$correo;
     }
-    private setNom($sexo){
+    function setSex($sexo){
         $this->sexo=$sexo;
     }
 
-    public function envDat(){
-        $sql = "INSERT INTO usuario (idusu, idemp, nombre, apellido ,correo, sexo)";
-
+    function save(){
+        try{
+            $sql = "INSERT INTO usuario (idemp, nombre, apellido, correo, sexo) VALUES (:idemp, :nombre, :apellido, :correo, :sexo)";
+            $modelo = new conexion();
+            $conexion = $modelo->get_conexion();
+            $result = $conexion->prepare($sql);
+            $nomtpr = $this->getNomtpr();
+            $result->bindParam(":nomtpr",$nomtpr);
+            $deptpr = $this->getDeptpr();
+            $result->bindParam(":deptpr",$deptpr);
+            $acttpr = $this->getActtpr();
+            $result->bindParam(":acttpr",$acttpr);
+            $result ->execute();
+        }catch(Exception $e){
+            ManejoError($e);
+        }
     }
 
 

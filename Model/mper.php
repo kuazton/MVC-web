@@ -8,16 +8,16 @@ class Mper {
     private $sexo;
 
     function getNom(){
-        $this->nombre;
+        return $this->nombre;
     }
     function getApe(){
-        $this->apellido;
+        return $this->apellido;
     }
     function getCorr(){
-        $this->correo;
+        return $this->correo;
     }
     function getSex(){
-        $this->sexo;
+        return $this->sexo;
     }
     function setNom($nombre){
         $this->nombre=$nombre;
@@ -33,30 +33,19 @@ class Mper {
     }
 
     function save(){
-        try{
-            $sql = "INSERT INTO usuario (idemp, nombre, apellido, correo, sexo) VALUES (:idemp, :nombre, :apellido, :correo, :sexo)";
-            $modelo = new conexion();
-            $conexion = $modelo->get_conexion();
-            $result = $conexion->prepare($sql);
-            $nomtpr = $this->getNomtpr();
-            $result->bindParam(":nomtpr",$nomtpr);
-            $deptpr = $this->getDeptpr();
-            $result->bindParam(":deptpr",$deptpr);
-            $acttpr = $this->getActtpr();
-            $result->bindParam(":acttpr",$acttpr);
-            $result ->execute();
-        }catch(Exception $e){
-            ManejoError($e);
-        }
+        $sql = "INSERT INTO usuario (nombre, apellido, correo, sexo) VALUES (:nombre, :apellido, :correo, :sexo)";
+        $modelo = new conexion();
+        $conexion = $modelo->get_conexion();
+        $result = $conexion->prepare($sql);
+        $nombre = $this->getNom();
+        $result->bindParam(":nombre",$nombre);
+        $apellido = $this->getApe();
+        $result->bindParam(":apellido",$apellido);
+        $correo = $this->getCorr();
+        $result->bindParam(":correo",$correo);
+        $sexo = $this->getSex();
+        $result->bindParam(":sexo",$sexo);
+        $result ->execute();
     }
-
-
-
-
-
 }
-
-
-
-
 ?>

@@ -2,7 +2,7 @@
 class conexion{
 	public function get_conexion(){
 		include ("datos.php");
-		$conexion=new PDO($db, $user, $pass);
+		$conexion=new PDO($db, $us, $pas);
 		return $conexion;
 	}
 }

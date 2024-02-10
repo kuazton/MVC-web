@@ -1,31 +1,21 @@
 <?php 
-include("models/mtpa.php");
+include('model/mper.php');
 
-$mtpr = new Mtpr();
+$mper = new Mper();
 
-$nombre = isset($_REQUEST['nombre']) ? $_REQUEST['nombre']:NULL;
+$idusu = isset($_REQUEST['idusu']) ? $_REQUEST['idusu']:NULL;
+$nombre = isset($_POST['nombre']) ? $_POST['nombre']:NULL;
 $apellido = isset($_POST['apellido']) ? $_POST['apellido']:NULL;
 $correo = isset($_POST['correo']) ? $_POST['correo']:NULL;
-$acttpr = isset($_POST['acttpr']) ? $_POST['acttpr']:NULL;
+$sexo = isset($_POST['sexo']) ? $_POST['sexo']:NULL;
 
 $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope']:NULL;
 $datOne = NULL;
 
-$mtpr->setNom($nombre);
+$mper->setNom($nombre);
+$mper->setApe($apellido);
+$mper->setCorr($correo);
+$mper->setSex($sexo);
 
-if($ope=="save"){
-	$mtpr->setApe($nomtpr);
-	$mtpr->setDeptpr($deptpr);
-	$mtpr->setActtpr($acttpr);
-	if(!$idtpr) $mtpr->save(); else $mtpr->edit();//!= si la variable esta vacia guarda sino edita
-}
-
-if($ope=="eli" && $idtpr) $mtpr->del();
-
-if($ope=="edi" && $idtpr) $datOne = $mtpr->getOne();
-
-$datAll = $mtpr->getAll();
-$datTpr = $mtpr->getDet();
-$datGraf = $mtpr->getGraf();
-$datPdf = $mtpr->getAllPDF();
+$mper->save();
 ?>
